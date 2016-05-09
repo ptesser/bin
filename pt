@@ -1,0 +1,31 @@
+#!/bin/bash
+
+case "$1" in
+
+    "new-repo")
+        echo "Start to create a new repo";
+        # TODO: Insert check if $2 val is empty or if dir already exists
+
+        mkdir "$2";
+        cd "$2";
+        git init;
+        touch .gitignore;
+        touch README.md;
+
+        echo ".DS_Store" >> .gitignore;
+        echo ".idea/" >> .gitignore;
+
+        git add -A;
+        git commit -m 'first commit';
+
+        echo "Map local repo to remote if it exist. Give me the url of the remote repo. Type n if you don't want add a remote repo.";
+        read REPO_URL;
+        # TODO: Check if user input if n or empty
+        git remote add origin "$REPO_URL";
+        git push -u origin master;
+
+        echo "End to create the new repo";;
+
+    *) echo "no command map";;
+
+esac
